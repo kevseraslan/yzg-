@@ -393,12 +393,14 @@
                 </div>
 
                 <button
+                  id="startAnalysisBtn"
                   class="mt-2 flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#ff2a5f] to-[#be003f] py-5 font-space-grotesk text-lg font-extrabold text-white shadow-[0_10px_30px_rgba(255,42,95,0.4)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(255,42,95,0.6)] active:scale-[0.98]"
                   type="button"
                 >
                   <span class="material-symbols-outlined">rocket_launch</span>
                   ANALİZİ BAŞLAT
                 </button>
+                <div class="px-1 text-sm text-white/50" id="formMessage"></div>
               </form>
             </div>
             <div class="group relative h-64 overflow-hidden rounded-2xl border border-white/5">
@@ -425,13 +427,14 @@
               <div class="space-y-8 rounded-[22px] bg-[#15151e] p-8">
                 <div class="flex items-center justify-between">
                   <span
+                    id="analysisBadge"
                     class="rounded-full border border-[#ff2a5f]/20 bg-[#ff2a5f]/10 px-3 py-1 font-label-caps text-label-caps text-[#ff2a5f]"
                     >ANALİZ TAMAMLANDI</span
                   >
                   <span class="font-mono text-xs text-white/40">TS: 22:14:02</span>
                 </div>
                 <div class="space-y-2 text-center">
-                  <div class="neon-text-glow font-data-display leading-none text-[#ff2a5f] text-data-display">%78</div>
+                  <div id="riskScore" class="neon-text-glow font-data-display leading-none text-[#ff2a5f] text-data-display">%78</div>
                   <div class="font-h3 text-h3 uppercase tracking-tighter text-white">Risk Skoru</div>
                 </div>
                 <div class="space-y-4 rounded-2xl border border-white/5 bg-surface-container p-6">
@@ -441,13 +444,13 @@
                     </div>
                     <div>
                       <div class="text-xs font-bold uppercase tracking-widest text-white/50">Durum</div>
-                      <div class="font-space-grotesk font-medium text-white">Koroner Arter Hastalığı Riski</div>
+                      <div id="riskStatus" class="font-space-grotesk font-medium text-white">Koroner Arter Hastalığı Riski</div>
                     </div>
                   </div>
                 </div>
                 <div class="space-y-4">
                   <h4 class="success-glow px-1 font-label-caps text-label-caps text-[#00e475]">ACİL EYLEM PLANI</h4>
-                  <ul class="space-y-3">
+                  <ul class="space-y-3" id="actionsList">
                     <li
                       class="group flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-[#00e475]/30"
                     >
@@ -578,11 +581,97 @@
         }
       }
 
+      function getInputValue(id) {
+        return document.getElementById(id)?.value ?? "";
+      }
+
+      function setFormMessage(message, isError) {
+        const formMessage = document.getElementById("formMessage");
+        if (!formMessage) return;
+        formMessage.textContent = message;
+        formMessage.className = `px-1 text-sm ${isError ? "text-red-300" : "text-white/60"}`;
+      }
+
+      function renderActions(actions) {
+        const list = document.getElementById("actionsList");
+        if (!list || !Array.isArray(actions)) return;
+        list.innerHTML = "";
+        actions.forEach((text) => {
+          const li = document.createElement("li");
+          li.className =
+            "group flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-[#00e475]/30";
+          li.innerHTML = `
+            <div class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#00e475]">
+              <div class="h-1.5 w-1.5 rounded-full bg-[#00e475]"></div>
+            </div>
+            <p class="font-inter text-sm text-white/80"></p>
+          `;
+          li.querySelector("p").textContent = text;
+          list.appendChild(li);
+        });
+      }
+
+      async function submitAnalysis() {
+        const payload = {
+          age: Number(getInputValue("age")),
+          sex: getInputValue("sex"),
+          sys: Number(getInputValue("sys")),
+          dia: Number(getInputValue("dia")),
+          chol: Number(getInputValue("chol")),
+          heightCm: Number(getInputValue("heightCm")),
+          weightKg: Number(getInputValue("weightKg")),
+          familyHistory: !!document.getElementById("familyHistory")?.checked,
+        };
+
+        const required = ["age", "sys", "dia", "chol", "heightCm", "weightKg"];
+        const hasInvalid = required.some((k) => !Number.isFinite(payload[k]) || payload[k] <= 0);
+        if (hasInvalid) {
+          setFormMessage("Lütfen tüm sayısal alanlara geçerli değer girin.", true);
+          return;
+        }
+
+        const button = document.getElementById("startAnalysisBtn");
+        if (button) button.setAttribute("disabled", "true");
+        setFormMessage("Model analizi yapılıyor...", false);
+
+        try {
+          const response = await fetch("/api/predict", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+          });
+          const data = await response.json();
+          if (!response.ok) {
+            throw new Error(data.error || "Analiz sırasında bir hata oluştu.");
+          }
+
+          const riskScore = document.getElementById("riskScore");
+          const riskStatus = document.getElementById("riskStatus");
+          const analysisBadge = document.getElementById("analysisBadge");
+          const bmiEl = document.getElementById("bmiValue");
+          const mapEl = document.getElementById("map");
+
+          if (riskScore) riskScore.textContent = `%${data.riskScore}`;
+          if (riskStatus) riskStatus.textContent = `${data.riskLevel} - ${data.status}`;
+          if (analysisBadge) analysisBadge.textContent = "MODEL ANALİZİ";
+          if (bmiEl && Number.isFinite(Number(data.bmi))) bmiEl.textContent = String(data.bmi);
+          if (mapEl && Number.isFinite(Number(data.map))) mapEl.value = String(data.map);
+
+          renderActions(data.actions);
+          setFormMessage("Analiz tamamlandı.", false);
+        } catch (error) {
+          setFormMessage(error.message || "Sunucuya bağlanılamadı. app.py çalışıyor olmalı.", true);
+        } finally {
+          if (button) button.removeAttribute("disabled");
+        }
+      }
+
       window.addEventListener("DOMContentLoaded", () => {
         const ids = ["heightCm", "weightKg", "sys", "dia"];
         for (const id of ids) {
           document.getElementById(id)?.addEventListener("input", updateDerived);
         }
+        document.getElementById("startAnalysisBtn")?.addEventListener("click", submitAnalysis);
         updateDerived();
       });
     </script>
