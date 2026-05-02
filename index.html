@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html class="dark" lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>2 Saatte Taşikardi | Kalp Risk Terminali</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              outline: "#ac888a",
+              background: "#13131b",
+              "inverse-surface": "#e4e1ee",
+              error: "#ffb4ab",
+              surface: "#13131b",
+              "outline-variant": "#5c3f41",
+              "on-secondary-fixed-variant": "#005226",
+              "on-error": "#690005",
+              "secondary-fixed-dim": "#00e475",
+              "primary-container": "#ff5070",
+              "surface-variant": "#34343e",
+              "secondary-container": "#05e777",
+              "on-primary": "#67001e",
+              "inverse-on-surface": "#302f39",
+              "surface-container-high": "#292933",
+              "error-container": "#93000a",
+              "surface-dim": "#13131b",
+              "surface-tint": "#ffb2b9",
+              "tertiary-container": "#0098e7",
+              "on-tertiary-container": "#002c48",
+              "on-secondary-container": "#00622e",
+              "primary-fixed": "#ffdadc",
+              tertiary: "#95ccff",
+              "surface-container-lowest": "#0d0d16",
+              secondary: "#7dffa2",
+              "on-tertiary-fixed": "#001d32",
+              "on-surface-variant": "#e6bcbf",
+              "surface-container-highest": "#34343e",
+              "on-secondary": "#003918",
+              "surface-bright": "#393842",
+              "on-secondary-fixed": "#00210b",
+              "inverse-primary": "#be003f",
+              "primary-fixed-dim": "#ffb2b9",
+              "on-primary-fixed": "#40000f",
+              "secondary-fixed": "#62ff96",
+              "on-tertiary": "#003352",
+              "tertiary-fixed-dim": "#95ccff",
+              primary: "#ffb2b9",
+              "surface-container": "#1f1f28",
+              "tertiary-fixed": "#cde5ff",
+              "on-primary-container": "#5b0019",
+              "surface-container-low": "#1b1b24",
+              "on-surface": "#e4e1ee",
+              "on-error-container": "#ffdad6",
+              "on-background": "#e4e1ee",
+              "on-primary-fixed-variant": "#91002e",
+              "on-tertiary-fixed-variant": "#004a75",
+            },
+            borderRadius: {
+              DEFAULT: "0.25rem",
+              lg: "0.5rem",
+              xl: "0.75rem",
+              full: "9999px",
+            },
+            spacing: {
+              xs: "4px",
+              lg: "24px",
+              sm: "8px",
+              md: "16px",
+              xl: "40px",
+              "container-margin": "24px",
+              unit: "4px",
+              gutter: "16px",
+            },
+            fontFamily: {
+              "body-lg": ["Inter"],
+              h2: ["Space Grotesk"],
+              "body-md": ["Inter"],
+              "data-display": ["Space Grotesk"],
+              h3: ["Space Grotesk"],
+              h1: ["Space Grotesk"],
+              "label-caps": ["Space Grotesk"],
+            },
+            fontSize: {
+              "body-lg": [
+                "18px",
+                { lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              h2: [
+                "32px",
+                { lineHeight: "1.2", letterSpacing: "-0.01em", fontWeight: "600" },
+              ],
+              "body-md": [
+                "16px",
+                { lineHeight: "1.5", letterSpacing: "0em", fontWeight: "400" },
+              ],
+              "data-display": [
+                "64px",
+                { lineHeight: "1", letterSpacing: "-0.04em", fontWeight: "700" },
+              ],
+              h3: [
+                "24px",
+                { lineHeight: "1.3", letterSpacing: "0em", fontWeight: "600" },
+              ],
+              h1: [
+                "48px",
+                { lineHeight: "1.1", letterSpacing: "-0.02em", fontWeight: "700" },
+              ],
+              "label-caps": [
+                "12px",
+                { lineHeight: "1", letterSpacing: "0.1em", fontWeight: "700" },
+              ],
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      body {
+        background-color: #0a0a0f;
+        color: #e4e1ee;
+      }
+      .glass-card {
+        background: rgba(21, 21, 30, 0.7);
+        backdrop-filter: blur(20px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      .neon-glow:focus {
+        box-shadow: 0 0 15px rgba(255, 42, 95, 0.3);
+        border-color: #ff2a5f;
+        outline: none;
+      }
+      .neon-text-glow {
+        text-shadow: 0 0 10px rgba(255, 42, 95, 0.5);
+      }
+      .success-glow {
+        text-shadow: 0 0 10px rgba(0, 228, 117, 0.5);
+      }
+      .material-symbols-outlined {
+        font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+      }
+    </style>
+  </head>
+  <body class="font-body-md overflow-x-hidden">
+    <header
+      class="fixed top-0 z-50 flex h-16 w-full items-center justify-between border-b border-white/10 bg-[#0a0a0f]/80 px-6 shadow-[0_0_15px_rgba(255,42,95,0.1)] backdrop-blur-xl"
+    >
+      <div class="font-space-grotesk text-xl font-bold uppercase tracking-tighter text-[#ff2a5f]">
+        2 Saatte Taşikardi
+      </div>
+      <div class="flex items-center gap-6">
+        <nav class="hidden items-center gap-8 md:flex">
+          <a class="font-space-grotesk font-bold text-[#ff2a5f] transition-colors" href="#">Panel</a>
+          <a class="font-space-grotesk text-white/60 transition-colors hover:text-[#ff2a5f]" href="#"
+            >Risk Geçmişi</a
+          >
+          <a class="font-space-grotesk text-white/60 transition-colors hover:text-[#ff2a5f]" href="#"
+            >Protokoller</a
+          >
+        </nav>
+        <div class="flex items-center gap-4">
+          <span
+            class="material-symbols-outlined cursor-pointer text-white/60 transition-colors hover:text-[#ff2a5f]"
+            >notifications</span
+          >
+          <span
+            class="material-symbols-outlined cursor-pointer text-white/60 transition-colors hover:text-[#ff2a5f]"
+            >account_circle</span
+          >
+        </div>
+      </div>
+    </header>
+
+    <div class="flex min-h-screen pt-16">
+      <aside class="hidden h-[calc(100vh-64px)] w-64 flex-col border-r border-white/10 bg-[#0a0a0f] px-4 py-8 md:flex">
+        <div class="mb-10 px-2">
+          <div class="font-space-grotesk text-lg font-black text-[#ff2a5f]">Hasta Terminali</div>
+          <div class="mt-1 font-mono text-xs uppercase tracking-widest text-white/40">ID: DSS-8821</div>
+        </div>
+        <nav class="flex flex-col gap-2">
+          <a class="group flex items-center gap-3 border-r-2 border-[#ff2a5f] bg-[#ff2a5f]/10 px-4 py-3 text-[#ff2a5f] transition-all" href="#">
+            <span class="material-symbols-outlined duration-300 group-hover:translate-x-1">analytics</span>
+            <span class="font-space-grotesk font-medium">Panel</span>
+          </a>
+          <a class="group flex items-center gap-3 px-4 py-3 text-white/40 transition-all hover:bg-white/5 hover:text-white/80" href="#">
+            <span class="material-symbols-outlined duration-300 group-hover:translate-x-1">history</span>
+            <span class="font-space-grotesk font-medium">Risk Geçmişi</span>
+          </a>
+          <a class="group flex items-center gap-3 px-4 py-3 text-white/40 transition-all hover:bg-white/5 hover:text-white/80" href="#">
+            <span class="material-symbols-outlined duration-300 group-hover:translate-x-1">monitor_heart</span>
+            <span class="font-space-grotesk font-medium">Tıbbi Profil</span>
+          </a>
+          <a class="group flex items-center gap-3 px-4 py-3 text-white/40 transition-all hover:bg-white/5 hover:text-white/80" href="#">
+            <span class="material-symbols-outlined duration-300 group-hover:translate-x-1">emergency</span>
+            <span class="font-space-grotesk font-medium">Acil Protokol</span>
+          </a>
+        </nav>
+        <div class="mt-auto px-2">
+          <button
+            class="w-full rounded-lg bg-[#ff2a5f] py-4 text-xs font-bold uppercase tracking-widest text-white shadow-[0_0_20px_rgba(255,42,95,0.3)] transition-all duration-200 active:scale-95"
+          >
+            Yeni Analiz
+          </button>
+        </div>
+      </aside>
+
+      <main class="mx-auto w-full max-w-7xl flex-1 p-6 md:p-12 lg:p-16">
+        <div class="grid grid-cols-1 items-start gap-8 lg:grid-cols-12">
+          <section class="space-y-8 lg:col-span-7">
+            <div class="space-y-2">
+              <h1 class="font-h1 text-h1 tracking-tight text-on-background">
+                Kalp Hastalığı <span class="neon-text-glow text-[#ff2a5f]">Risk Analizi</span>
+              </h1>
+              <p class="max-w-xl font-body-lg text-body-lg text-on-surface-variant">
+                Kardiyovasküler riskleri öngörmek için klinik biyobelirteçleri girin.
+              </p>
+            </div>
+            <div class="glass-card relative overflow-hidden rounded-2xl p-8">
+              <div class="absolute right-0 top-0 p-4 opacity-10">
+                <span class="material-symbols-outlined text-9xl">biotech</span>
+              </div>
+              <form class="relative z-10 space-y-6" id="health-form">
+                <div class="space-y-1">
+                  <div class="font-space-grotesk text-xl font-extrabold tracking-tight text-white">Sağlık Verileri</div>
+                  <div class="text-sm text-white/50">Bilgilerinizi girin</div>
+                </div>
+
+                <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                  <div class="space-y-2">
+                    <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">YAŞ</label>
+                    <input
+                      id="age"
+                      class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 font-space-grotesk text-white transition-all"
+                      placeholder="45"
+                      type="number"
+                      inputmode="numeric"
+                      min="0"
+                      max="120"
+                    />
+                  </div>
+
+                  <div class="space-y-2">
+                    <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">CİNSİYET</label>
+                    <select
+                      id="sex"
+                      class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 font-space-grotesk text-white transition-all"
+                    >
+                      <option value="erkek" selected>Erkek</option>
+                      <option value="kadin">Kadın</option>
+                      <option value="diger">Diğer</option>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="px-1 font-space-grotesk text-sm font-bold tracking-wide text-[#ff2a5f]">Tansiyon Değerleri</div>
+                  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-2">
+                      <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">BÜYÜK TANSİYON</label>
+                      <div class="relative">
+                        <input
+                          id="sys"
+                          class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white transition-all"
+                          placeholder="120"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="300"
+                        />
+                        <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">mmHg</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">KÜÇÜK TANSİYON</label>
+                      <div class="relative">
+                        <input
+                          id="dia"
+                          class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white transition-all"
+                          placeholder="80"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="200"
+                        />
+                        <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">mmHg</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">KOLESTEROL DÜZEYİ</label>
+                  <div class="relative">
+                    <input
+                      id="chol"
+                      class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white transition-all"
+                      placeholder="200"
+                      type="number"
+                      inputmode="numeric"
+                      min="0"
+                      max="1000"
+                    />
+                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">mg/dL</span>
+                  </div>
+                </div>
+
+                <div class="space-y-3">
+                  <div class="px-1 font-space-grotesk text-sm font-bold tracking-wide text-[#00e475]">Vücut Kitle Endeksi</div>
+                  <div class="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div class="space-y-2">
+                      <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">BOY</label>
+                      <div class="relative">
+                        <input
+                          id="heightCm"
+                          class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white transition-all"
+                          placeholder="175"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="250"
+                        />
+                        <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">cm</span>
+                      </div>
+                    </div>
+                    <div class="space-y-2">
+                      <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">KİLO</label>
+                      <div class="relative">
+                        <input
+                          id="weightKg"
+                          class="neon-glow w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white transition-all"
+                          placeholder="75"
+                          type="number"
+                          inputmode="numeric"
+                          min="0"
+                          max="400"
+                        />
+                        <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">kg</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="rounded-2xl border border-[#00e475]/20 bg-gradient-to-r from-[#00e475]/15 to-transparent p-4">
+                    <div class="flex items-center justify-between">
+                      <div class="font-space-grotesk text-sm font-bold text-white/80">Hesaplanan BMI</div>
+                      <div class="font-space-grotesk text-2xl font-extrabold text-[#00e475]" id="bmiValue">—</div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="space-y-2">
+                  <label class="block px-1 font-label-caps text-label-caps text-on-surface-variant/70">ORTALAMA KAN BASINCI</label>
+                  <div class="relative">
+                    <input
+                      id="map"
+                      class="w-full rounded-xl border border-white/10 bg-[#0a0a0f] px-4 py-4 pr-16 font-space-grotesk text-white/80"
+                      value=""
+                      placeholder="—"
+                      type="text"
+                      readonly
+                    />
+                    <span class="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-xs text-white/40">mmHg</span>
+                  </div>
+                  <div class="px-1 text-xs text-white/40">Hesaplama: \( MAP \approx \frac{SYS + 2 \cdot DIA}{3} \)</div>
+                </div>
+
+                <div class="rounded-2xl border border-[#ff2a5f]/20 bg-gradient-to-r from-[#ff2a5f]/15 to-transparent p-5">
+                  <div class="flex items-center justify-between gap-4">
+                    <div>
+                      <div class="font-space-grotesk text-sm font-extrabold text-white">Genetik Kalp Hastalığı</div>
+                      <div class="text-xs text-white/50">Ailenizde kalp hastalığı var mı?</div>
+                    </div>
+                    <label class="relative inline-flex cursor-pointer items-center">
+                      <input id="familyHistory" type="checkbox" class="peer sr-only" />
+                      <div
+                        class="h-7 w-12 rounded-full bg-white/10 transition peer-checked:bg-[#ff2a5f]/60 peer-focus:outline-none"
+                      ></div>
+                      <div
+                        class="absolute left-1 top-1 h-5 w-5 rounded-full bg-white/60 transition peer-checked:translate-x-5 peer-checked:bg-white"
+                      ></div>
+                    </label>
+                  </div>
+                </div>
+
+                <button
+                  class="mt-2 flex w-full items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-[#ff2a5f] to-[#be003f] py-5 font-space-grotesk text-lg font-extrabold text-white shadow-[0_10px_30px_rgba(255,42,95,0.4)] transition-all duration-300 hover:shadow-[0_10px_40px_rgba(255,42,95,0.6)] active:scale-[0.98]"
+                  type="button"
+                >
+                  <span class="material-symbols-outlined">rocket_launch</span>
+                  ANALİZİ BAŞLAT
+                </button>
+              </form>
+            </div>
+            <div class="group relative h-64 overflow-hidden rounded-2xl border border-white/5">
+              <img
+                class="h-full w-full object-cover opacity-40 transition-transform duration-1000 group-hover:scale-105"
+                alt="Fütüristik tıbbi veri görselleştirme arka planı"
+                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBKJqPfr09g5FQAC41uHyX34s_YpOTAbWnakdB9wB3J1H5RMmYoeoEmXx-bv5wHaOzMVXsYhpFqSwI7hVu2OyoFfZx-K4LT9knz41tRBVsR4KMwL5NZKZyXhbon3qIhiZq1VMBlv15hp4tpJzKQ2Hyqk55_Dx0eOwcTNVeYfJcsHXzx6AJh8tMqdr28BZdxzW-m0SSIt69Fi4iuZuX8_jzPqy4cQrQxSk0_BOdtMxcZAfuF0Wug2g2kLdehT9DL_Vj0URtMQXFJVLc"
+              />
+              <div class="absolute inset-0 bg-gradient-to-t from-[#0a0a0f] via-transparent to-transparent"></div>
+              <div class="absolute bottom-6 left-6 flex items-center gap-4">
+                <div class="flex h-12 w-12 items-center justify-center rounded-full border border-[#ff2a5f]/40 bg-[#ff2a5f]/20">
+                  <span class="material-symbols-outlined text-[#ff2a5f]">database</span>
+                </div>
+                <div>
+                  <div class="font-space-grotesk font-bold text-white">Küresel Yapay Zekâ Eğitimi</div>
+                  <div class="text-xs text-white/40">42,1M Hasta Kaydı İşleniyor</div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <aside class="space-y-6 lg:col-span-5">
+            <div class="glass-card rounded-3xl bg-gradient-to-br from-[#ff2a5f]/30 to-transparent p-1">
+              <div class="space-y-8 rounded-[22px] bg-[#15151e] p-8">
+                <div class="flex items-center justify-between">
+                  <span
+                    class="rounded-full border border-[#ff2a5f]/20 bg-[#ff2a5f]/10 px-3 py-1 font-label-caps text-label-caps text-[#ff2a5f]"
+                    >ANALİZ TAMAMLANDI</span
+                  >
+                  <span class="font-mono text-xs text-white/40">TS: 22:14:02</span>
+                </div>
+                <div class="space-y-2 text-center">
+                  <div class="neon-text-glow font-data-display leading-none text-[#ff2a5f] text-data-display">%78</div>
+                  <div class="font-h3 text-h3 uppercase tracking-tighter text-white">Risk Skoru</div>
+                </div>
+                <div class="space-y-4 rounded-2xl border border-white/5 bg-surface-container p-6">
+                  <div class="flex items-center gap-4">
+                    <div class="rounded-lg bg-[#ff2a5f]/20 p-2">
+                      <span class="material-symbols-outlined text-[#ff2a5f]">warning</span>
+                    </div>
+                    <div>
+                      <div class="text-xs font-bold uppercase tracking-widest text-white/50">Durum</div>
+                      <div class="font-space-grotesk font-medium text-white">Koroner Arter Hastalığı Riski</div>
+                    </div>
+                  </div>
+                </div>
+                <div class="space-y-4">
+                  <h4 class="success-glow px-1 font-label-caps text-label-caps text-[#00e475]">ACİL EYLEM PLANI</h4>
+                  <ul class="space-y-3">
+                    <li
+                      class="group flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-[#00e475]/30"
+                    >
+                      <div class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#00e475]">
+                        <div class="h-1.5 w-1.5 rounded-full bg-[#00e475]"></div>
+                      </div>
+                      <p class="font-inter text-sm text-white/80">Kardiyoloji uzmanı ile derhal konsültasyon planlanmalı.</p>
+                    </li>
+                    <li
+                      class="group flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-[#00e475]/30"
+                    >
+                      <div class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#00e475]">
+                        <div class="h-1.5 w-1.5 rounded-full bg-[#00e475]"></div>
+                      </div>
+                      <p class="font-inter text-sm text-white/80">Düşük sodyum ve doymuş yağ içeren 'Kalp Dostu' diyete geçiş.</p>
+                    </li>
+                    <li
+                      class="group flex items-start gap-4 rounded-xl border border-white/5 bg-white/5 p-4 transition-all hover:border-[#00e475]/30"
+                    >
+                      <div class="mt-1 flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[#00e475]">
+                        <div class="h-1.5 w-1.5 rounded-full bg-[#00e475]"></div>
+                      </div>
+                      <p class="font-inter text-sm text-white/80">Günlük 30 dakika orta tempolu yürüyüş izlemi.</p>
+                    </li>
+                  </ul>
+                </div>
+                <button
+                  class="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-transparent py-4 text-sm font-bold uppercase tracking-widest text-white/60 transition-all hover:border-white/30 hover:text-white"
+                >
+                  <span class="material-symbols-outlined text-sm">download</span>
+                  PDF RAPORU İNDİR
+                </button>
+              </div>
+            </div>
+            <div
+              class="glass-card flex items-center justify-between rounded-2xl border border-[#00e475]/20 bg-[#00e475]/5 p-6"
+            >
+              <div class="flex items-center gap-4">
+                <div class="rounded-full bg-[#00e475]/20 p-3">
+                  <span class="material-symbols-outlined text-[#00e475]">health_and_safety</span>
+                </div>
+                <div>
+                  <div class="font-space-grotesk font-bold text-white">Bulgular Stabil</div>
+                  <div class="animate-pulse font-mono text-xs text-[#00e475]">İZLEME AKTİF</div>
+                </div>
+              </div>
+              <div class="text-right">
+                <div class="text-[10px] font-bold uppercase text-white/40">Nabız</div>
+                <div class="font-space-grotesk text-lg font-bold text-white">
+                  72 <span class="text-xs font-normal text-white/40">BPM</span>
+                </div>
+              </div>
+            </div>
+          </aside>
+        </div>
+      </main>
+    </div>
+
+    <nav
+      class="fixed bottom-0 left-0 z-50 flex h-20 w-full items-center justify-around rounded-t-2xl border-t border-white/10 bg-[#15151e]/90 pb-safe shadow-[0_-4px_20px_rgba(0,0,0,0.5)] backdrop-blur-md md:hidden"
+    >
+      <a
+        class="flex flex-col items-center justify-center text-[#ff2a5f] shadow-[0_0_10px_rgba(255,42,95,0.3)] transition-transform active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">home</span>
+        <span class="font-space-grotesk text-[10px] font-medium">Ana Sayfa</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-white/40 transition-transform hover:text-white/90 active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">biotech</span>
+        <span class="font-space-grotesk text-[10px] font-medium">Analiz</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-white/40 transition-transform hover:text-white/90 active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">query_stats</span>
+        <span class="font-space-grotesk text-[10px] font-medium">Trendler</span>
+      </a>
+      <a
+        class="flex flex-col items-center justify-center text-white/40 transition-transform hover:text-white/90 active:scale-90"
+        href="#"
+      >
+        <span class="material-symbols-outlined">e911_emergency</span>
+        <span class="font-space-grotesk text-[10px] font-medium">SOS</span>
+      </a>
+    </nav>
+
+    <script>
+      function toNumber(value) {
+        const n = Number(String(value ?? "").replace(",", "."));
+        return Number.isFinite(n) ? n : null;
+      }
+
+      function round1(n) {
+        return Math.round(n * 10) / 10;
+      }
+
+      function updateDerived() {
+        const heightCm = toNumber(document.getElementById("heightCm")?.value);
+        const weightKg = toNumber(document.getElementById("weightKg")?.value);
+        const sys = toNumber(document.getElementById("sys")?.value);
+        const dia = toNumber(document.getElementById("dia")?.value);
+
+        const bmiEl = document.getElementById("bmiValue");
+        const mapEl = document.getElementById("map");
+
+        if (bmiEl) {
+          if (heightCm && weightKg && heightCm > 0) {
+            const h = heightCm / 100;
+            const bmi = weightKg / (h * h);
+            bmiEl.textContent = String(round1(bmi));
+          } else {
+            bmiEl.textContent = "—";
+          }
+        }
+
+        if (mapEl) {
+          if (sys != null && dia != null) {
+            const map = (sys + 2 * dia) / 3;
+            mapEl.value = String(Math.round(map));
+          } else {
+            mapEl.value = "";
+          }
+        }
+      }
+
+      window.addEventListener("DOMContentLoaded", () => {
+        const ids = ["heightCm", "weightKg", "sys", "dia"];
+        for (const id of ids) {
+          document.getElementById(id)?.addEventListener("input", updateDerived);
+        }
+        updateDerived();
+      });
+    </script>
+  </body>
+</html>
